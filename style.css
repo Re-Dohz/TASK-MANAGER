@@ -684,6 +684,7 @@ body {
 .empty-title,
 .empty-description {
     transition: color 180ms ease, transform 180ms ease, text-shadow 180ms ease;
+    cursor: pointer;
 }
 
 .app-header .eyebrow:hover,
@@ -726,6 +727,14 @@ body {
 
 .form-message:not(:empty) {
     animation: task-enter 240ms ease-out both;
+}
+
+@media (hover: none), (pointer: coarse) {
+    *,
+    *::before,
+    *::after {
+        cursor: none !important;
+    }
 }
 
 
