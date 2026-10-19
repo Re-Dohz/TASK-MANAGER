@@ -302,12 +302,14 @@ body {
     overflow-wrap: anywhere;
     line-height: 1.4;
     cursor: pointer;
+    transition: color 180ms ease, transform 180ms ease, text-decoration-color 180ms ease;
 }
 
 .task-text:hover {
     color: #ffe0a8;
     text-decoration: underline;
     text-underline-offset: 3px;
+    transform: translateX(2px);
 }
 
 .task-text:focus-visible {
@@ -319,6 +321,10 @@ body {
 .task-item.is-complete .task-text {
     opacity: 0.65;
     text-decoration: line-through;
+}
+
+.task-item.is-complete {
+    animation: task-complete 360ms ease-out both;
 }
 
 .task-actions {
@@ -444,6 +450,23 @@ body {
     }
 }
 
+@keyframes task-complete {
+    0% { transform: scale(1); }
+    45% { transform: scale(1.035); }
+    100% { transform: scale(1); }
+}
+
+@keyframes confetti-pop {
+    from {
+        opacity: 1;
+        transform: translate(0, 0) rotate(0) scale(1);
+    }
+    to {
+        opacity: 0;
+        transform: translate(var(--confetti-x), var(--confetti-y)) rotate(var(--confetti-turn)) scale(0.35);
+    }
+}
+
 @media (prefers-reduced-motion: reduce) {
     *,
     *::before,
@@ -533,6 +556,44 @@ body {
     }
 }
 
+@media (max-width: 360px) {
+    .container {
+        padding: 12px 8px;
+    }
+
+    .todo-app {
+        padding: 1rem;
+        gap: 18px;
+    }
+
+    .date-navigation {
+        gap: 6px;
+    }
+
+    #date-picker {
+        width: 150px;
+        padding: 0 6px;
+        font-size: 0.85rem;
+    }
+
+    .date-shortcuts button {
+        padding: 4px 2px;
+        font-size: 0.76rem;
+    }
+
+    .task-item {
+        grid-template-columns: 18px minmax(0, 1fr) auto;
+        gap: 5px;
+        padding: 8px 6px;
+        font-size: 0.86rem;
+    }
+
+    .task-action {
+        width: 27px;
+        height: 30px;
+    }
+}
+
 .todo-app {
     color: #f6efe3;
 }
@@ -614,6 +675,57 @@ body {
 
 .empty-description {
     color: #eadcc5;
+}
+
+.app-header .eyebrow,
+.app-header .title,
+.app-header .current-date,
+.app-header .encouragement,
+.empty-title,
+.empty-description {
+    transition: color 180ms ease, transform 180ms ease, text-shadow 180ms ease;
+}
+
+.app-header .eyebrow:hover,
+.app-header .title:hover,
+.app-header .current-date:hover,
+.app-header .encouragement:hover,
+.empty-title:hover,
+.empty-description:hover {
+    color: #fff;
+    text-shadow: 0 0 12px rgba(255, 255, 255, 0.22);
+    transform: translateY(-1px);
+}
+
+.date-shortcuts button {
+    transition: color 160ms ease, transform 160ms ease;
+}
+
+.date-shortcuts button:hover {
+    transform: translateY(-1px);
+}
+
+.confetti-burst {
+    position: fixed;
+    z-index: 1000;
+    width: 0;
+    height: 0;
+    pointer-events: none;
+}
+
+.confetti-piece {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 7px;
+    height: 11px;
+    background: var(--confetti-color);
+    border-radius: 2px;
+    animation: confetti-pop 760ms cubic-bezier(0.12, 0.7, 0.3, 1) both;
+}
+
+.form-message:not(:empty) {
+    animation: task-enter 240ms ease-out both;
 }
 
 
