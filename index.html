@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DAILY TASK MANAGER</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css">
+    <script src="index.js" defer></script>
+</head>
+<body>
+    
+    <div class="container">
+        <div class="todo-app">
+            <header class="app-header">
+                <p class="eyebrow">YOUR DAILY PLAN</p>
+                <h1 class="title">TASK MANAGER</h1>
+                <p class="current-date" id="current-date"></p>
+                <p class="encouragement">Keep it up! Every small step counts.</p>
+            </header>
+            <nav class="date-navigation" aria-label="Choose task date">
+                <button class="date-nav-button" id="previous-date" type="button" aria-label="Previous day" title="Previous day"><i class="fa-solid fa-chevron-left" aria-hidden="true"></i></button>
+                <input id="date-picker" type="date" aria-label="Choose day, month, and year">
+                <button class="date-nav-button" id="next-date" type="button" aria-label="Next day" title="Next day"><i class="fa-solid fa-chevron-right" aria-hidden="true"></i></button>
+            </nav>
+            <div class="date-shortcuts" role="group" aria-label="Quick date filters">
+                <button type="button" data-date-shortcut="yesterday" aria-pressed="false">Yesterday</button>
+                <button type="button" data-date-shortcut="today" aria-pressed="true">Today</button>
+                <button type="button" data-date-shortcut="tomorrow" aria-pressed="false">Tomorrow</button>
+                <button type="button" data-date-shortcut="all" aria-pressed="false">All</button>
+            </div>
+            <form class="input-task" id="task-form">
+                <div class="task-entry">
+                    <input type="text" id="text-area" placeholder="Add a task..." maxlength="120" autocomplete="off" aria-label="New task">
+                    <button type="submit" id="add-btn" aria-label="Add task" title="Add task"><i class="fa-solid fa-plus" aria-hidden="true"></i></button>
+                </div>
+                <p class="form-message" id="form-message" aria-live="polite"></p>
+                <div class="todo-container">
+                    <ul id="task-list" aria-label="Your tasks" hidden></ul>
+                    <div class="empty-state" id="empty-state">
+                        <p class="empty-title">A fresh start</p>
+                        <p class="empty-description">Add your first task and build a little momentum.</p>
+                    </div>
+                    <img class="empty-image" src="./images/empty.png" alt="" aria-hidden="true">
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,619 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+* { 
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Roboto", sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: url(./images/background.jpg)
+    no-repeat center center/cover;
+}
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    padding: 0 20px ;
+}
+.todo-app {
+    display: flex;
+    width: 100%;
+    max-width: 520px;
+    padding: 2rem;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 30px;
+    color: aliceblue;
+    border-radius: 20px;
+    box-shadow:0 0 100px rgba(0, 0, 0, 0.5) ;
+    border: 3px solid rgba(255, 255, 255, 0.18);
+    backdrop-filter:blur;
+    animation: app-enter 600ms cubic-bezier(0.2, 0.7, 0.3, 1) backwards;
+}
+
+.app-header {
+    width: 100%;
+    text-align: center;
+}
+
+.eyebrow {
+    margin-bottom: 8px;
+    color: #ffd0db;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+}
+
+.title {
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+.current-date {
+    margin-top: 8px;
+    color: rgba(255, 255, 255, 0.82);
+    font-size: 0.9rem;
+}
+
+.encouragement {
+    margin-top: 14px;
+    color: #ffe0a8;
+    font-size: 0.98rem;
+    font-weight: 600;
+}
+
+.date-navigation {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    width: 100%;
+}
+
+.date-nav-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 38px;
+    color: #222;
+    background: rgba(255, 255, 255, 0.82);
+    border: 1px solid rgba(0, 0, 0, 0.16);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 160ms ease, transform 160ms ease, opacity 160ms ease;
+}
+
+.date-nav-button {
+    width: 38px;
+}
+
+.date-nav-button:disabled {
+    opacity: 0.45;
+    cursor: default;
+}
+
+.date-nav-button:hover:not(:disabled) {
+    background: #fff;
+    transform: translateY(-1px);
+}
+
+.date-shortcuts {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    width: 100%;
+    padding: 4px;
+    gap: 3px;
+    background: transparent;
+    border: 0;
+}
+
+.date-shortcuts button {
+    min-width: 0;
+    min-height: 36px;
+    padding: 5px 8px;
+    color: #444;
+    font: inherit;
+    font-size: 0.86rem;
+    background: transparent;
+    border: 0;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: color 160ms ease, background-color 160ms ease, box-shadow 160ms ease;
+}
+
+.date-shortcuts button[aria-pressed="true"] {
+    color: #111;
+    font-weight: 700;
+}
+
+.date-shortcuts button:hover:not([aria-pressed="true"]) {
+    color: #111;
+}
+
+#date-picker {
+    width: 178px;
+    min-width: 0;
+    min-height: 38px;
+    padding: 0 10px;
+    color: #171717;
+    color-scheme: light;
+    font: inherit;
+    background: rgba(255, 255, 255, 0.86);
+    border: 1px solid rgba(0, 0, 0, 0.16);
+    border-radius: 10px;
+}
+
+#date-picker:focus-visible,
+.date-nav-button:focus-visible,
+.date-shortcuts button:focus-visible {
+    outline: 2px solid #222;
+    outline-offset: 2px;
+}
+
+.input-task{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+}
+
+.task-entry {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.task-entry input {
+    flex: 1;
+    padding: 10px 17px;
+    font-size: 1.1rem;
+    border: none;
+    outline: none;
+    border-radius: 22px;
+    background: rgba(255, 194, 209, 0.3);
+    color: #dbdbdb;
+    transition: background-color 180ms ease, box-shadow 180ms ease;
+}
+
+.task-entry input:focus {
+    background: rgba(255, 194, 209, 0.42);
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.2);
+}
+
+.task-entry input::placeholder {
+    color: #bcbcbc;
+}
+
+.task-entry button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 10px;
+    padding: 8px;
+    border-radius: 50%;
+    color: #fff;
+    font-size: 1.1rem;
+    background: rgba(255, 194, 209, 0.3); 
+    border: 2px solid rgba(255, 255, 255, 0.18);
+    cursor: pointer;
+    transition: transform 200ms ease, background-color 200ms ease, box-shadow 200ms ease;
+}
+
+.task-entry button:hover {
+    transform: scale(1.1);
+    background: #a92e4b;
+}
+
+.form-message {
+    min-height: 0;
+    color: #ffe0a8;
+    font-size: 0.85rem;
+}
+
+.form-message:empty {
+    display: none;
+}
+
+.todo-container {
+    position: relative;
+    width: 100%;
+    min-height: 320px;
+    overflow: hidden;
+    border-radius: 22px;
+    background: rgba(255, 194, 209, 0.16);
+    animation: panel-enter 650ms cubic-bezier(0.2, 0.7, 0.3, 1) 120ms backwards;
+}
+
+#task-list {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+    margin: 0;
+    padding: 16px;
+    overflow-y: auto;
+    list-style: none;
+}
+
+#task-list[hidden],
+.empty-state[hidden],
+.empty-image[hidden] {
+    display: none;
+}
+
+.todo-container.has-tasks {
+    min-height: 0;
+    background: rgba(20, 25, 30, 0.3);
+}
+
+.todo-container.has-tasks #task-list {
+    position: relative;
+    inset: auto;
+}
+
+.task-item {
+    display: grid;
+    grid-template-columns: 22px minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 10px;
+    min-height: 52px;
+    padding: 10px 12px;
+    color: #fff;
+    background: rgba(20, 25, 30, 0.52);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 12px;
+    animation: task-enter 260ms ease-out both;
+}
+
+.task-item.is-removing {
+    animation: task-exit 180ms ease-in forwards;
+    pointer-events: none;
+}
+
+.task-checkbox {
+    width: 18px;
+    height: 18px;
+    margin: 0;
+    accent-color: #9b354d;
+    cursor: pointer;
+}
+
+.task-text {
+    display: block;
+    min-width: 0;
+    padding: 0;
+    color: inherit;
+    font: inherit;
+    text-align: left;
+    background: none;
+    border: 0;
+    overflow-wrap: anywhere;
+    line-height: 1.4;
+    cursor: pointer;
+}
+
+.task-text:hover {
+    color: #ffe0a8;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+.task-text:focus-visible {
+    outline: 2px solid #ffe0a8;
+    outline-offset: 3px;
+    border-radius: 2px;
+}
+
+.task-item.is-complete .task-text {
+    opacity: 0.65;
+    text-decoration: line-through;
+}
+
+.task-actions {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.task-action {
+    display: grid;
+    place-items: center;
+    width: 34px;
+    height: 34px;
+    padding: 0;
+    color: #fff;
+    background: transparent;
+    border: 0;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: color 160ms ease, background-color 160ms ease, transform 160ms ease;
+}
+
+.task-action:hover {
+    color: #ffe0a8;
+    background: rgba(255, 255, 255, 0.14);
+    transform: translateY(-1px);
+}
+
+.delete-task:hover {
+    color: #ffc2d1;
+}
+
+.task-edit-input {
+    width: 100%;
+    min-width: 0;
+    padding: 8px 10px;
+    color: #fff;
+    font: inherit;
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.45);
+    border-radius: 8px;
+}
+
+.empty-state {
+    position: absolute;
+    top: 50%;
+    left: 22px;
+    z-index: 1;
+    width: 42%;
+    color: #fff;
+    transform: translateY(-50%);
+}
+
+.empty-title {
+    margin-bottom: 8px;
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
+.empty-description {
+    color: rgba(255, 255, 255, 0.82);
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+#task-list li + li {
+    margin-top: 8px;
+}
+
+.empty-image {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 55%;
+    height: 100%;
+    object-fit: contain;
+    object-position: right center;
+    transition: transform 250ms ease;
+    pointer-events: none;
+}
+
+.todo-container:hover .empty-image {
+    transform: scale(1.025);
+}
+
+@keyframes app-enter {
+    from {
+        opacity: 0;
+        transform: translateY(18px) scale(0.98);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes panel-enter {
+    from {
+        opacity: 0;
+        transform: translateY(16px) scale(0.97);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes task-enter {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes task-exit {
+    to {
+        opacity: 0;
+        transform: translateX(12px);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-delay: 0ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        align-items: flex-start;
+    }
+
+    .container {
+        padding: 16px 12px;
+    }
+
+    .todo-app {
+        padding: 1.25rem;
+        gap: 22px;
+    }
+
+    .title {
+        font-size: 1.7rem;
+    }
+
+    .encouragement {
+        font-size: 0.92rem;
+    }
+
+    #date-picker {
+        width: 160px;
+        padding: 0 7px;
+        font-size: 0.9rem;
+    }
+
+    .task-entry input {
+        min-width: 0;
+        font-size: 1rem;
+        padding: 10px 14px;
+    }
+
+    .task-entry button {
+        flex-shrink: 0;
+    }
+
+    .todo-container {
+        min-height: 260px;
+    }
+
+    .todo-container.has-tasks {
+        min-height: 0;
+    }
+
+    #task-list {
+        padding: 12px;
+    }
+
+    .task-item {
+        grid-template-columns: 20px minmax(0, 1fr) auto;
+        gap: 7px;
+        padding: 9px;
+        font-size: 0.92rem;
+    }
+
+    .task-actions {
+        gap: 0;
+    }
+
+    .task-action {
+        width: 30px;
+        height: 32px;
+    }
+
+    .empty-state {
+        left: 16px;
+        width: 44%;
+        font-size: 0.9rem;
+    }
+
+    .empty-image {
+        width: 58%;
+    }
+}
+
+.todo-app {
+    color: #f6efe3;
+}
+
+.eyebrow {
+    color: #eadcc5;
+}
+
+.current-date {
+    color: #f6efe3;
+}
+
+.encouragement,
+.form-message {
+    color: #eadcc5;
+}
+
+.date-shortcuts button {
+    color: #eadcc5;
+}
+
+.date-shortcuts button[aria-pressed="true"],
+.date-shortcuts button:hover:not([aria-pressed="true"]) {
+    color: #fff;
+}
+
+.date-shortcuts button:focus-visible,
+.date-nav-button:focus-visible {
+    outline-color: #222;
+}
+
+#date-picker:focus-visible {
+    outline-color: #222;
+}
+
+.task-entry input {
+    color: #fff;
+}
+
+.task-entry input::placeholder {
+    color: #f1e3d0;
+}
+
+.task-entry button {
+    color: #fff;
+}
+
+.task-item {
+    color: #f6efe3;
+}
+
+.task-text:hover {
+    color: #fff;
+}
+
+.task-text:focus-visible {
+    outline-color: #222;
+}
+
+.task-action {
+    color: #eadcc5;
+}
+
+.task-action:hover {
+    color: #fff;
+}
+
+.delete-task:hover {
+    color: #fff;
+}
+
+.task-edit-input {
+    color: #fff;
+}
+
+.empty-state {
+    color: #f6efe3;
+}
+
+.empty-description {
+    color: #eadcc5;
+}
+
+
